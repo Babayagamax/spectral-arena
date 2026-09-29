@@ -1,0 +1,13 @@
+{
+  "appId": "com.voidbound.spectralarena",
+  "appName": "Spectral Arena",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#08070c"
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Voidbound Warden — Character Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08070c;
+    --bg-raise: #0e0d15;
+    --surface: #131119;
+    --surface-2: #191623;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --text: #ece8f2;
+    --text-dim: #9c94ab;
+    --aura: #9d6bff;
+    --aura-bright: #c4a3ff;
+    --aura-deep: #3a1f63;
+    --aura-dim: rgba(157,107,255,0.12);
+    --gold: #c9a227;
+    --gold-bright: #e6c35c;
+    --gold-dim: rgba(201,162,39,0.12);
+    --silver: #b4b9c6;
+    --font-display: 'Cinzel', 'Times New Roman', serif;
+    --font-body: 'Spectral', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* ---------- atmosphere ---------- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 8%, rgba(58,31,99,0.35), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 85% 75%, rgba(58,31,99,0.14), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page { position: relative; z-index: 1; }
+
+  /* ---------- top label ---------- */
+  .masthead {
+    padding: 42px 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .masthead .id {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--aura-bright);
+    text-transform: uppercase;
+  }
+  .masthead .id .dot { color: var(--gold); }
+  .masthead .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 48px;
+    align-items: center;
+    padding: 56px 0 30px;
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(44px, 5.5vw, 72px);
+    line-height: 1.04;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+  }
+  h1 .thin {
+    display: block;
+    font-weight: 500;
+    font-size: 0.42em;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--aura-bright);
+    margin-top: 14px;
+  }
+  .hero-lede {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin: 26px 0 34px;
+  }
+  .hero-lede em { color: var(--text); font-style: italic; }
+
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    border-top: 1px solid var(--border-strong);
+  }
+  .meta-table td {
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .meta-table td:first-child {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--aura-bright);
+    width: 132px;
+    padding-top: 13px;
+  }
+  .meta-table td:last-child { color: var(--text); }
+
+  /* ---------- illustration frame ---------- */
+  .plate {
+    position: relative;
+    border: 1px solid var(--border-strong);
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 42%, rgba(58,31,99,0.5), transparent 75%),
+      linear-gradient(180deg, var(--bg-raise), var(--bg));
+    padding: 10px;
+  }
+  .plate::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%);
+  }
+  .plate svg { display: block; width: 100%; height: auto; }
+  .plate .caption {
+    position: absolute;
+    left: 22px;
+    bottom: 18px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    z-index: 2;
+  }
+  .plate .corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--gold);
+    border-style: solid;
+    border-width: 0;
+    z-index: 2;
+  }
+  .plate .corner.tl { top: 6px; left: 6px; border-top-width: 1px; border-left-width: 1px; }
+  .plate .corner.br { bottom: 6px; right: 6px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  /* ---------- section headers ---------- */
+  section { padding: 44px 0 8px; }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+  }
+  .section-label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--aura);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .section-label .num { color: var(--gold); margin-left: auto; letter-spacing: 0.1em; }
+  .section-label .rule { flex: 1; height: 1px; background: var(--border); }
+
+  /* ---------- design pillar cards ---------- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 26px 22px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .pillar:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+  .pillar .glyph {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .pillar h3 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-bottom: 12px;
+  }
+  .pillar p { font-size: 14px; color: var(--text-dim); font-weight: 300; }
+  .pillar .edge {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--aura), transparent 65%);
+    opacity: 0.65;
+  }
+  .pillar.gold-tint .edge { background: linear-gradient(90deg, var(--gold), transparent 65%); }
+  .pillar.gold-tint .glyph { color: var(--aura-bright); }
+
+  /* ---------- palette ---------- */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .swatch { border: 1px solid var(--border); background: var(--surface); }
+  .swatch .chip { height: 74px; border-bottom: 1px solid var(--border); }
+  .swatch .chip-info { padding: 10px 12px; }
+  .swatch .name {
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
+  }
+  .swatch .hex {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- prompt block ---------- */
+  .prompt-card {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    padding: 26px 28px 22px;
+    position: relative;
+  }
+  .prompt-card .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .prompt-card .bar .tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .copy-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--aura-bright);
+    border: 1px solid var(--border-strong);
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .copy-btn:hover { background: var(--aura-dim); border-color: var(--aura); }
+  .copy-btn.copied { color: var(--gold); border-color: var(--gold); }
+  .prompt-card pre {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+  .prompt-card pre .hl { color: var(--aura-bright); }
+
+  /* ---------- generators table ---------- */
+  .gen-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  .gen-table th {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-strong);
+    font-weight: 400;
+  }
+  .gen-table td {
+    padding: 13px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .gen-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .gen-table td:first-child { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.03em; white-space: nowrap; }
+  .gen-table .fit {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .fit.best { color: var(--gold); }
+  .fit.good { color: var(--aura-bright); }
+  .fit.ok { color: var(--text-dim); }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ---------- entrance ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeScale {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .reveal { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .reveal-scale { animation: fadeScale 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .d1 { animation-delay: 0.08s; }
+  .d2 { animation-delay: 0.18s; }
+  .d3 { animation-delay: 0.28s; }
+  .d4 { animation-delay: 0.4s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-scale { animation: none; }
+    .pillar:hover { transform: none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 980px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; }
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+    .palette { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .page { padding: 0 18px 60px; }
+    .pillars { grid-template-columns: 1fr; }
+    .palette { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead reveal">
+    <span class="id"><span class="dot">◆</span>&nbsp; Character Concept &nbsp;·&nbsp; DWF-047</span>
+    <span class="meta">Dark Fantasy / Boss Design</span>
+  </div>
+
+  <div class="hero">
+    <div>
+      <div class="kicker reveal d1">A boss encounters the player once — and is remembered forever.</div>
+      <h1 class="reveal d1">The Voidbound<span class="thin">Warden</span></h1>
+      <p class="hero-lede reveal d2">
+        A silent sentinel wreathed in <em>spectral violet fire</em>. Its armor predates the kingdom
+        it guards — and the thing coiled around it is not decoration. It is the other half of the boss.
+      </p>
+      <table class="meta-table reveal d3">
+        <tr><td>Class</td><td>Ancient Guardian — Heavy Plate</td></tr>
+        <tr><td>Element</td><td>Void / Spectral Flame</td></tr>
+        <tr><td>Weapon</td><td>Greatsword of the Sunken Oath (planted stance)</td></tr>
+        <tr><td>Demeanor</td><td>Elegant, patient, absolute</td></tr>
+        <tr><td>Signature</td><td>The beast is drawn to the blade — both strike together</td></tr>
+      </table>
+    </div>
+
+    <div class="plate reveal-scale d2">
+      <span class="corner tl"></span><span class="corner br"></span>
+      <span class="caption">Plate I — The Warden, at rest</span>
+      <svg viewBox="0 0 800 1000" role="img" aria-label="Stylized illustration of a dark fantasy warrior in horned black armor with a greatsword, surrounded by violet spectral energy">
+        <defs>
+          <radialGradient id="bgGlow" cx="50%" cy="40%" r="65%">
+            <stop offset="0%" stop-color="#3a1f63" stop-opacity="0.85"/>
+            <stop offset="55%" stop-color="#1c1030" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#08070c" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#23222e"/>
+            <stop offset="42%" stop-color="#4a4c5e"/>
+            <stop offset="58%" stop-color="#67697f"/>
+            <stop offset="100%" stop-color="#191821"/>
+          </linearGradient>
+          <linearGradient id="steelDark" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#15131d"/>
+            <stop offset="50%" stop-color="#2e2c3c"/>
+            <stop offset="100%" stop-color="#100f16"/>
+          </linearGradient>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e6c35c"/>
+            <stop offset="100%" stop-color="#8a6d1d"/>
+          </linearGradient>
+          <linearGradient id="capeGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#131019"/>
+            <stop offset="70%" stop-color="#1b1526"/>
+            <stop offset="100%" stop-color="#0c0a11"/>
+          </linearGradient>
+          <linearGradient id="bladeGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#2a2b38"/>
+            <stop offset="45%" stop-color="#8b90a3"/>
+            <stop offset="55%" stop-color="#b4b9c6"/>
+            <stop offset="100%" stop-color="#33333f"/>
+          </linearGradient>
+          <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="7" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="softBlur" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="14"/>
+          </filter>
+        </defs>
+
+        <!-- atmosphere -->
+        <rect width="800" height="1000" fill="#08070c"/>
+        <rect width="800" height="1000" fill="url(#bgGlow)"/>
+
+        <!-- ground light pool -->
+        <ellipse cx="400" cy="916" rx="290" ry="46" fill="#5a35a0" opacity="0.28" filter="url(#softBlur)"/>
+        <ellipse cx="560" cy="916" rx="90" ry="22" fill="#7c4fd4" opacity="0.3" filter="url(#softBlur)"/>
+
+        <!-- spectral beast: great swirling body -->
+        <g opacity="0.9">
+          <path d="M150,840 C60,660 110,430 296,300 C428,206 520,168 662,104"
+                fill="none" stroke="#5f2fb8" stroke-width="46" stroke-linecap="round" opacity="0.30" filter="url(#softBlur)"/>
+          <path d="M150,840 C60,660 110,430 296,300 C428,206 520,168 662,104"
+                fill="none" stroke="#8b4fe8" stroke-width="12" stroke-linecap="round" opacity="0.55" filter="url(#glow)"/>
+          <path d="M150,840 C60,660 110,430 296,300 C428,206 520,168 662,104"
+                fill="none" stroke="#d7bfff" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+          <!-- secondary coil around the warrior -->
+          <path d="M700,760 C640,690 560,720 520,640 C480,560 560,520 610,470"
+                fill="none" stroke="#8b4fe8" stroke-width="9" stroke-linecap="round" opacity="0.45" filter="url(#glow)"/>
+          <path d="M240,760 C300,700 350,740 372,660" fill="none" stroke="#6d3cd0" stroke-width="7" stroke-linecap="round" opacity="0.4" filter="url(#glow)"/>
+          <!-- beast head, top right -->
+          <g filter="url(#glow)">
+            <path d="M648,116 C676,86 716,80 742,96 C726,98 714,108 708,122 C730,122 748,134 756,152 C738,144 720,146 706,154 C716,166 718,180 712,192 C700,168 676,150 650,144 C640,136 640,124 648,116 Z"
+                  fill="#5f2fb8" opacity="0.8"/>
+            <circle cx="672" cy="126" r="5" fill="#e9dcff"/>
+          </g>
+        </g>
+
+        <!-- floating particles -->
+        <g fill="#c4a3ff">
+          <circle cx="180" cy="250" r="3" opacity="0.8"/>
+          <circle cx="255" cy="160" r="2" opacity="0.5"/>
+          <circle cx="120" cy="430" r="2.2" opacity="0.6"/>
+          <circle cx="205" cy="560" r="1.8" opacity="0.45"/>
+          <circle cx="105" cy="700" r="2.6" opacity="0.55"/>
+          <circle cx="470" cy="140" r="2.4" opacity="0.7"/>
+          <circle cx="610" cy="330" r="3" opacity="0.6"/>
+          <circle cx="700" cy="420" r="2" opacity="0.5"/>
+          <circle cx="660" cy="600" r="2.6" opacity="0.65"/>
+          <circle cx="722" cy="250" r="1.8" opacity="0.45"/>
+          <circle cx="500" cy="760" r="2.2" opacity="0.5"/>
+          <circle cx="300" cy="860" r="2" opacity="0.4"/>
+          <circle cx="410" cy="120" r="1.6" opacity="0.5"/>
+          <circle cx="555" cy="430" r="2.2" opacity="0.55"/>
+        </g>
+
+        <!-- ==================== WARRIOR ==================== -->
+
+        <!-- cape, flowing to the left -->
+        <path d="M372,178
+                 C298,194 240,242 205,332
+                 C176,410 166,520 152,640
+                 C146,700 130,780 138,862
+                 L158,836 L172,872 L194,842 L210,878 L228,848 L244,884 L262,852 L280,888 L300,858 L318,892 L338,862 L356,896 L374,868 L390,898 L404,870
+                 C417,700 422,500 416,300
+                 C413,240 402,200 372,178 Z"
+              fill="url(#capeGrad)"/>
+        <path d="M330,240 C300,320 284,440 280,570" fill="none" stroke="#5f2fb8" stroke-width="3" opacity="0.35" filter="url(#glow)"/>
+
+        <!-- legs & greaves -->
+        <path d="M332,590 L316,700 L296,810 L268,874 L318,878 L338,800 L352,700 L356,610 Z" fill="url(#steelDark)" stroke="#2a2440" stroke-width="1"/>
+        <path d="M376,592 L390,700 L408,812 L438,878 L392,880 L372,804 L356,702 L352,612 Z" fill="url(#steelDark)" stroke="#2a2440" stroke-width="1"/>
+        <!-- boots -->
+        <path d="M264,862 L324,860 L334,898 L318,912 L256,912 L248,892 Z" fill="#191723" stroke="#2a2440" stroke-width="1"/>
+        <path d="M382,866 L442,868 L452,890 L440,912 L374,912 L372,898 Z" fill="#191723" stroke="#2a2440" stroke-width="1"/>
+        <!-- knee plates -->
+        <path d="M300,724 L330,718 L336,746 L306,752 Z" fill="url(#steel)" opacity="0.9"/>
+        <path d="M382,724 L410,730 L406,756 L378,750 Z" fill="url(#steel)" opacity="0.9"/>
+
+        <!-- fauld / tasset skirt -->
+        <path d="M316,548 L398,548 L408,600 L306,600 Z" fill="url(#steelDark)"/>
+        <path d="M312,596 L412,596 L420,636 L302,636 Z" fill="#1a1826"/>
+        <path d="M312,596 L412,596 L420,636 L302,636 Z" fill="none" stroke="#3d3355" stroke-width="1"/>
+
+        <!-- torso: layered cuirass -->
+        <path d="M318,302 C322,288 344,282 360,282 C378,282 398,288 402,302
+                 L424,352 C438,384 444,430 440,470 C436,510 424,544 408,560
+                 L376,578 L344,578 L314,560 C298,544 286,510 282,470 C278,430 284,384 298,352 Z"
+              fill="url(#steel)" stroke="#23213a" stroke-width="1.5"/>
+        <!-- chest ridge -->
+        <path d="M360,286 L362,574" stroke="#1d1c29" stroke-width="3" opacity="0.7"/>
+        <!-- engraved pattern: chevrons + seam glow -->
+        <g stroke="#9d6bff" stroke-width="2.2" fill="none" opacity="0.85" filter="url(#glow)">
+          <path d="M330,392 L360,372 L390,392"/>
+          <path d="M324,432 L360,410 L396,432"/>
+          <path d="M330,472 L360,452 L390,472"/>
+        </g>
+        <path d="M360,300 L360,560" stroke="#c4a3ff" stroke-width="1.4" opacity="0.55" filter="url(#glow)"/>
+        <!-- layer seam lines -->
+        <path d="M296,420 C324,432 398,432 426,420" fill="none" stroke="#1d1c29" stroke-width="2" opacity="0.8"/>
+        <path d="M300,486 C330,500 392,500 422,486" fill="none" stroke="#1d1c29" stroke-width="2" opacity="0.8"/>
+
+        <!-- gorget -->
+        <path d="M332,286 L388,286 L382,306 L338,306 Z" fill="url(#steelDark)"/>
+
+        <!-- pauldrons: layered, sharp -->
+        <g>
+          <path d="M310,318 C282,314 258,326 246,352 L258,392 L282,398 L298,404 C288,376 292,344 310,318 Z" fill="url(#steel)" stroke="#23213a" stroke-width="1.5"/>
+          <path d="M250,358 L222,344 L262,398 Z" fill="url(#steel)" stroke="#23213a" stroke-width="1.5"/>
+          <path d="M298,344 L268,352 L292,382 Z" fill="#3a3850"/>
+        </g>
+        <g>
+          <path d="M410,318 C438,314 462,326 474,352 L462,392 L438,398 L422,404 C432,376 428,344 410,318 Z" fill="url(#steel)" stroke="#23213a" stroke-width="1.5"/>
+          <path d="M470,358 L498,344 L458,398 Z" fill="url(#steel)" stroke="#23213a" stroke-width="1.5"/>
+          <path d="M422,344 L452,352 L428,382 Z" fill="#3a3850"/>
+        </g>
+        <!-- pauldron glow seams -->
+        <path d="M252,356 C276,332 298,324 312,326" fill="none" stroke="#9d6bff" stroke-width="1.8" opacity="0.8" filter="url(#glow)"/>
+        <path d="M468,356 C444,332 422,324 408,326" fill="none" stroke="#9d6bff" stroke-width="1.8" opacity="0.8" filter="url(#glow)"/>
+
+        <!-- left arm (viewer left), hanging -->
+        <path d="M292,392 C280,412 272,442 268,470 C264,496 262,518 266,536 L288,540 C284,514 288,478 296,448 C302,424 308,406 310,396 Z"
+              fill="url(#steelDark)" stroke="#2a2440" stroke-width="1"/>
+        <!-- left gauntlet -->
+        <path d="M260,530 L292,528 L296,576 L258,578 Z" fill="url(#steel)" stroke="#23213a" stroke-width="1"/>
+        <path d="M262,542 L294,540" stroke="#9d6bff" stroke-width="1.6" opacity="0.7" filter="url(#glow)"/>
+
+        <!-- right arm (viewer right), hand resting on pommel -->
+        <path d="M430,388 C452,398 478,398 502,384 C518,374 532,358 540,342
+                 C548,326 556,300 560,278 L582,284 C578,312 570,342 560,366
+                 C548,396 526,418 498,428 C468,438 440,432 420,418 Z"
+              fill="url(#steelDark)" stroke="#2a2440" stroke-width="1"/>
+        <!-- right gauntlet gripping near pommel -->
+        <path d="M544,262 L584,256 L590,296 L550,302 Z" fill="url(#steel)" stroke="#23213a" stroke-width="1"/>
+        <path d="M548,272 L586,266" stroke="#9d6bff" stroke-width="1.6" opacity="0.7" filter="url(#glow)"/>
+
+        <!-- ==================== GREATSWORD (planted) ==================== -->
+        <g>
+          <!-- blade, tip in ground -->
+          <path d="M548,286 L574,286 L570,872 L561,908 L552,872 Z" fill="url(#bladeGrad)" stroke="#3a3d4c" stroke-width="1"/>
+          <!-- fuller -->
+          <path d="M561,300 L561,860" stroke="#2c2e3a" stroke-width="4"/>
+          <path d="M561,300 L561,860" stroke="#9d6bff" stroke-width="1.4" opacity="0.8" filter="url(#glow)"/>
+          <!-- engraved runes on blade -->
+          <g fill="#c4a3ff" opacity="0.9" filter="url(#glow)">
+            <rect x="557" y="360" width="8" height="3"/>
+            <rect x="557" y="420" width="8" height="3"/>
+            <rect x="557" y="480" width="8" height="3"/>
+            <rect x="557" y="540" width="8" height="3"/>
+          </g>
+          <!-- crossguard -->
+          <path d="M496,262 L626,262 L634,276 L620,288 L502,288 L488,276 Z" fill="url(#goldGrad)" stroke="#5c4812" stroke-width="1"/>
+          <path d="M500,270 L622,270" stroke="#f0d98a" stroke-width="1.4" opacity="0.7"/>
+          <!-- grip -->
+          <path d="M548,196 L574,196 L578,262 L544,262 Z" fill="#241d14" stroke="#3a2f1a" stroke-width="1"/>
+          <g stroke="#c9a227" stroke-width="2" opacity="0.85">
+            <path d="M548,208 L574,204"/><path d="M546,222 L576,218"/><path d="M545,236 L577,232"/><path d="M544,250 L578,246"/>
+          </g>
+          <!-- pommel, gold, glowing -->
+          <circle cx="561" cy="182" r="17" fill="url(#goldGrad)" stroke="#5c4812" stroke-width="1"/>
+          <circle cx="561" cy="182" r="9" fill="none" stroke="#e9dcff" stroke-width="1.6" opacity="0.9" filter="url(#glow)"/>
+          <circle cx="561" cy="182" r="17" fill="none" stroke="#9d6bff" stroke-width="2" opacity="0.5" filter="url(#glow)"/>
+        </g>
+
+        <!-- ==================== HELMET (horned, faceless) ==================== -->
+        <g>
+          <!-- neck guard -->
+          <path d="M336,236 L386,236 L392,266 L330,266 Z" fill="#1a1826"/>
+          <!-- dome -->
+          <path d="M334,214 C334,182 344,158 361,158 C378,158 388,182 388,214
+                   L392,240 C386,252 336,252 330,240 Z"
+                fill="url(#steel)" stroke="#23213a" stroke-width="1.5"/>
+          <!-- brow ridge -->
+          <path d="M336,204 C348,198 374,198 386,204 L384,214 C372,208 350,208 338,214 Z" fill="#2c2a3e"/>
+          <!-- visor void -->
+          <path d="M342,220 C350,216 372,216 380,220 L378,242 C370,246 352,246 344,242 Z" fill="#050409"/>
+          <!-- eye glow -->
+          <path d="M348,229 L374,229" stroke="#c4a3ff" stroke-width="3.2" filter="url(#glow)"/>
+          <!-- horns -->
+          <path d="M338,182 C322,158 306,128 278,102 C274,98 270,100 274,106 C296,130 314,158 330,190 Z"
+                fill="url(#steel)" stroke="#23213a" stroke-width="1.4"/>
+          <path d="M384,182 C400,158 416,128 444,102 C448,98 452,100 448,106 C426,130 408,158 392,190 Z"
+                fill="url(#steel)" stroke="#23213a" stroke-width="1.4"/>
+          <!-- horn rim glow -->
+          <path d="M280,104 C302,128 318,156 332,186" fill="none" stroke="#9d6bff" stroke-width="1.6" opacity="0.7" filter="url(#glow)"/>
+          <path d="M442,104 C420,128 404,156 390,186" fill="none" stroke="#9d6bff" stroke-width="1.6" opacity="0.7" filter="url(#glow)"/>
+        </g>
+
+        <!-- rim light on shoulder, key edge -->
+        <path d="M246,352 C258,326 282,314 310,318" fill="none" stroke="#c4a3ff" stroke-width="1.2" opacity="0.5"/>
+        <path d="M474,352 C462,326 438,314 410,318" fill="none" stroke="#c4a3ff" stroke-width="1.2" opacity="0.5"/>
+
+        <!-- foreground energy wisps crossing low -->
+        <path d="M180,940 C280,905 420,915 520,880" fill="none" stroke="#8b4fe8" stroke-width="3" opacity="0.4" filter="url(#glow)"/>
+        <path d="M140,880 C240,850 460,862 560,830" fill="none" stroke="#6d3cd0" stroke-width="2" opacity="0.3" filter="url(#glow)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ DESIGN PILLARS ============ -->
+  <section>
+    <div class="section-label reveal">Design Pillars <span class="rule"></span> <span class="num">02</span></div>
+    <div class="pillars">
+      <div class="pillar reveal d1">
+        <span class="edge"></span>
+        <div class="glyph">I · Plate</div>
+        <h3>The Armor</h3>
+        <p>Black and silver full plate, layered with sharp overlapping plates and engraved
+           chevron patterns. Violet energy runs through every seam — the armor is not
+           decorated, it is <em>powered</em>.</p>
+      </div>
+      <div class="pillar gold-tint reveal d2">
+        <span class="edge"></span>
+        <div class="glyph">II · Steel</div>
+        <h3>The Greatsword</h3>
+        <p>An ancient blade planted vertically at rest, taller than a man. Metallic texture with a
+           glowing fuller, engraved runes — and a single gold pommel, the only warm light in the
+           whole design.</p>
+      </div>
+      <div class="pillar reveal d3">
+        <span class="edge"></span>
+        <div class="glyph">III · Spectre</div>
+        <h3>The Beast</h3>
+        <p>Swirling purple spectral energy coils around the Warden like a gigantic ethereal dragon.
+           It is silhouette, threat, and readability all at once — the boss fight's second health bar.</p>
+      </div>
+      <div class="pillar gold-tint reveal d4">
+        <span class="edge"></span>
+        <div class="glyph">IV · Stage</div>
+        <h3>The Atmosphere</h3>
+        <p>Deep black void, intense violet rim light, volumetric shadow, floating particles.
+           Cinematic key lighting from below and behind — the Warden arrives before the fight begins.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PALETTE ============ -->
+  <section>
+    <div class="section-label reveal">Color Study <span class="rule"></span> <span class="num">03</span></div>
+    <div class="palette reveal d1">
+      <div class="swatch"><div class="chip" style="background:#08070c"></div><div class="chip-info"><div class="name">Void Black</div><div class="hex">#08070C</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#3a1f63"></div><div class="chip-info"><div class="name">Deep Aura</div><div class="hex">#3A1F63</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#9d6bff"></div><div class="chip-info"><div class="name">Spectral Violet</div><div class="hex">#9D6BFF</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#c4a3ff"></div><div class="chip-info"><div class="name">Rim Glow</div><div class="hex">#C4A3FF</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#b4b9c6"></div><div class="chip-info"><div class="name">Cold Silver</div><div class="hex">#B4B9C6</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#c9a227"></div><div class="chip-info"><div class="name">Oath Gold</div><div class="hex">#C9A227</div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ PROMPT ============ -->
+  <section>
+    <div class="section-label reveal">The Prompt <span class="rule"></span> <span class="num">04</span></div>
+    <div class="prompt-card reveal d1">
+      <div class="bar">
+        <span class="tag">Full text · ready for any image generator</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">Copy</button>
+      </div>
+      <pre id="promptText">A terrifying yet majestic dark-fantasy warrior standing in a powerful heroic pose, wearing intricate ancient black and silver full-body armor with elaborate engraved patterns, sharp layered plates, glowing violet magical energy flowing through the armor, a mysterious horned helmet completely concealing the face, long tattered dark cape and cloth elements flowing dramatically, enormous ancient greatsword planted vertically beside the warrior, massive blade with metallic details and a golden pommel, surrounded by swirling purple spectral energy resembling a gigantic ethereal beast or dragon, floating magical particles, dark supernatural atmosphere, deep black background, intense violet glow, cinematic lighting, volumetric shadows, highly detailed armor, realistic metal textures, epic fantasy boss design, imposing silhouette, elegant but intimidating, dark souls / high-fantasy aesthetic, ultra-detailed, dramatic composition, 4K, concept art, masterpiece.</pre>
+    </div>
+
+    <table class="gen-table reveal d2" style="margin-top:28px">
+      <thead>
+        <tr><th>Generator</th><th>Why it fits</th><th>Fit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Midjourney</td><td>Best-in-class for painterly dark-fantasy concept art; add <code>--ar 2:3 --style raw</code> for a character portrait ratio.</td><td class="fit best">Ideal</td></tr>
+        <tr><td>Stable Diffusion</td><td>With a Dark Souls / concept-art LoRA from Civitai, gives the most control over armor detail. Works with your prompt nearly verbatim.</td><td class="fit best">Ideal</td></tr>
+        <tr><td>DALL·E / GPT Image</td><td>Strong prompt adherence — the horned helmet and gold pommel details usually survive intact.</td><td class="fit good">Great</td></tr>
+        <tr><td>Leonardo.ai</td><td>Has dedicated fantasy-art fine-tuned models; good free tier for iterating on the pose.</td><td class="fit good">Great</td></tr>
+        <tr><td>Gemini / Imagen</td><td>Fast and clean, though the "dark souls aesthetic" reference is often softened.</td><td class="fit ok">Good</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <span>Concept sheet · The Voidbound Warden</span>
+    <span>Plate I of I · Rev A</span>
+  </footer>
+</div>
+
+<script>
+  function copyPrompt() {
+    const btn = document.getElementById('copyBtn');
+    const text = document.getElementById('promptText').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+    });
+  }
+</script>
+</body>
+</html>
