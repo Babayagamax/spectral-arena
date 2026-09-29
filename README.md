@@ -39,7 +39,9 @@ spectral-arena/
 ├── package.json
 ├── docs/
 │   └── playstore-guide.md    ← step-by-step Google Play publishing guide
-└── .github/workflows/pages.yml ← auto-deploys the game to GitHub Pages
+└── .github/workflows/
+    ├── pages.yml             ← auto-deploys the game to GitHub Pages
+    └── build-android.yml     ← builds the Play Store app in the cloud
 ```
 
 ## Publish on Google Play
@@ -53,6 +55,31 @@ npx cap add android
 npx capacitor-assets generate --android
 cd android && ./gradlew bundleRelease   # → app-release.aab for the Play Store
 ```
+
+### 📱 No computer? Build in the cloud (works entirely from a tablet)
+
+GitHub can build the Play Store app for you — **no Android Studio needed**:
+
+1. **Add the signing secrets** (one time). Repo → *Settings* → *Secrets and
+   variables* → *Actions* → *New repository secret*. Create these four, pasting
+   the values from the `signing-details.txt` / `keystore-base64.txt` files you
+   were given:
+   | Secret name | Value |
+   |---|---|
+   | `KEYSTORE_BASE64` | entire contents of `keystore-base64.txt` |
+   | `KSTORE_PWD` | the password in `signing-details.txt` |
+   | `KEY_ALIAS` | `spectralarena` |
+   | `KEY_PWD` | the password in `signing-details.txt` (same as `KSTORE_PWD`) |
+
+2. **Run the build.** Repo → *Actions* tab → **Build Android app (Play Store)** →
+   *Run workflow*. ~10 minutes later the finished `app-release.aab` appears
+   under **Releases** — download it straight from your tablet.
+
+3. **Upload to Google.** [play.google.com/console](https://play.google.com/console)
+   in your tablet browser → create app → *Release → Production* → upload the
+   `.aab`. The privacy policy URL is:
+   `https://babayagamax.github.io/spectral-arena/privacy.html`
+   (live once GitHub Pages is enabled — see above).
 
 ## Design docs
 
